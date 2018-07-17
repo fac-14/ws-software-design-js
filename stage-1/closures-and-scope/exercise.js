@@ -20,6 +20,7 @@ var inc = 1;
  * increment(2); // returns 3
  */
 function increment (n) {
+  return n + inc;
   // fill in ...
 }
 

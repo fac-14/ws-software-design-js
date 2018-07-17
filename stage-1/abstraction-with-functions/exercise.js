@@ -19,54 +19,72 @@
  */
 'use strict';
 
-function capitaliseObjectKeys (input) {
+function capitalisation (value){
+  return value.slice(0, 1).toUpperCase().concat(value.slice(1))
+};
+
+function increment (value) {
+  return value + 1;
+};
+
+function reverse (value) {
+  return value.split('').reverse().join('');
+}
+
+
+function modifyObj(func, keyValue, input) {
   const keys = Object.keys(input);
   const result = {};
 
-  for (var ii = 0; ii < keys.length; ii++) {
-    const capitalisedKey = keys[ii].slice(0, 1).toUpperCase().concat(keys[ii].slice(1));
-    result[capitalisedKey] = input[keys[ii]];
+  for (var i = 0; i < keys.length; i++) {
+    if(keyValue == "keys") {
+      const value = keys[i];
+      const changed = func(value);
+      result[changed] = input[value];
+    } else if (keyValue == "values") {
+      const value = input[keys[i]];
+      result[keys[i]] = func(value);
+    }
   }
 
   return result;
+}
+
+
+function capitaliseObjectKeys (input) {
+  return modifyObj(capitalisation, "keys", input);
 }
 
 
 function capitaliseObjectValues (input) {
-  const keys = Object.keys(input);
-  const result = {};
-
-  for (var ii = 0; ii < keys.length; ii++) {
-    const value = input[keys[ii]];
-    const capitalisedValue = value.slice(0, 1).toUpperCase().concat(value.slice(1));
-    result[keys[ii]] = capitalisedValue;
-  }
-
-  return result;
+  return modifyObj(capitalisation, "values", input);
 }
 
+
 function incrementObjectValues (input) {
-  const keys = Object.keys(input);
-  const result = {};
+  return modifyObj(increment, "values", input);
+  // const keys = Object.keys(input);
+  // const result = {};
 
-  for (var ii = 0; ii < keys.length; ii++) {
-    const value = input[keys[ii]];
-    result[keys[ii]] = value + 1;
-  }
+  // for (var i = 0; i < keys.length; i++) {
+  //   const value = input[keys[i]];
+  //   result[keys[i]] = value + 1;
+  // }
 
-  return result;
+  // return result;
 }
 
 function reverseObjectKeys (input) {
-  const keys = Object.keys(input);
-  const result = {};
+  return modifyObj(reverse, "keys", input);
+  // const keys = Object.keys(input);
+  // const result = {};
 
-  for (var ii = 0; ii < keys.length; ii++) {
-    const reversedKey = keys[ii].split('').reverse().join('');
-    result[reversedKey] = input[keys[ii]];
-  }
+  // for (var i = 0; i < keys.length; i++) {
+  //   const reversedKey = keys[i].split('').reverse().join('');
+  //   result[reversedKey] = input[keys[i]];
+  // }
 
-  return result;
+  // return result;
 }
 
 module.exports = {

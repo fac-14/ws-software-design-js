@@ -16,11 +16,11 @@
 document.querySelector('#form-unanswered').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  var form = e.target;
-  var tags = form.querySelector('input[name=tags]').value;
-  var url  = 'https://api.stackexchange.com/2.2/questions/unanswered?order=desc&sort=activity&site=stackoverflow&tagged=' + tags;
+  let form = e.target;
+  let tags = form.querySelector('input[name=tags]').value;
+  let url  = 'https://api.stackexchange.com/2.2/questions/unanswered?order=desc&sort=activity&site=stackoverflow&tagged=' + tags;
 
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
 
   xhr.addEventListener('load', function () {
     if (xhr.status === 200) {
